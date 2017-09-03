@@ -6,6 +6,7 @@ import {AppComponent} from "./app.component";
 import {authConfig, firebaseConfig} from "environments/firebaseConfig";
 import {AngularFireModule} from "angularfire2";
 import {AuthService} from "app/shared/auth.service";
+import { WeatherService } from 'app/shared/weather-service.service';
 import {LoginUserComponent} from "app/login-user/login-user.component";
 import {DisplayUserComponent} from "app/display-user/display-user.component";
 import {RegisterUserComponent} from "app/register-user/register-user.component";
@@ -41,7 +42,7 @@ const appRoutes: Routes = [
         AngularFireModule.initializeApp(firebaseConfig, authConfig),
         RouterModule.forRoot(appRoutes)
     ],
-    providers: [AuthService],
+    providers: [AuthService, WeatherService],
     bootstrap: [AppComponent]
 })
 
