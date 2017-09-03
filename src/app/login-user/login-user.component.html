@@ -1,10 +1,24 @@
-<h3>Please Log In</h3>
 <div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-6">
-        <a href="#" class="btn btn-lg btn-primary btn-block" (click)="loginVia('twitter')">Twitter</a>
-    </div>
-    <div class="col-xs-6 col-sm-6 col-md-6">
-        <a href="#" class="btn btn-lg btn-info btn-block" (click)="loginVia('google')">Google</a>
+    <div class="col-md-12">
+        <div style="display:inline">Login, </div>
+        <div class="btn btn btn-primary" (click)="goToRegister()">
+                Register
+            </div>
+            <div style="display:inline">Or </div>
+            <div class="btn btn btn-primary" (click)="continueAsGuest()">
+                    Continue as guest
+            </div>
+    </div> 
+</div>
+<div class="row">
+    <br>
+</div>
+<div class="row">
+    <!-- <div class="col-xs-6 col-sm-6 col-md-6">
+        <div href="#" class="btn btn-lg btn-primary btn-block" (click)="loginVia('twitter')">Twitter</div>
+    </div> -->
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="btn btn-lg btn-info btn-block" (click)="loginVia('google')">Google</div>
     </div>
 </div>
 <div class="login-or">
@@ -36,4 +50,7 @@
     <button type="submit" class="btn btn btn-primary">
         Log In
     </button>
+    <div class="btn btn btn-primary" (click)="forgotPassword()">
+        Forgot your password?
+    </div>
 </form>

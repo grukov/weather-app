@@ -49,4 +49,8 @@ export class AppComponent {
         this.alertType = null;
         this.alertMessage = "";
     }
+
+    logout(){
+        this.authService.logout();
+    }
 }

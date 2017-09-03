@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Output} from "@angular/core";
 import {AuthService} from "app/shared/auth.service";
 import {FormBuilder, Validators, AbstractControl, FormGroup} from "@angular/forms";
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-login-user',
@@ -14,7 +15,7 @@ export class LoginUserComponent {
     @Output() onSuccess = new EventEmitter();
     @Output() onError = new EventEmitter();
 
-    constructor(private authService: AuthService, private fb: FormBuilder) {
+    constructor(private authService: AuthService, private fb: FormBuilder, private router: Router) {
         this.form = fb.group({
             'email': ['', Validators.required],
             'password': ['', Validators.required]
@@ -30,8 +31,12 @@ export class LoginUserComponent {
                     () => {
                         this.onSuccess.emit();
                         this.form.reset();
+                        window.location.href = '/home';
                     },
-                    (err) => this.onError.emit(err)
+                    (err) => {
+                        this.onError.emit(err)
+                        console.log(err);
+                    }
                 );
         }
     }
@@ -41,5 +46,17 @@ export class LoginUserComponent {
             () => this.onSuccess.emit(),
             err => this.onError.emit(err)
         );
+    }
+
+    forgotPassword(){
+        this.router.navigateByUrl('/forgot-password');
+    }
+    
+    goToRegister(){
+        this.router.navigateByUrl('/register');
+    }
+
+    continueAsGuest(){
+        this.router.navigateByUrl('/home');
     }
 }

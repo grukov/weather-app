@@ -11,6 +11,17 @@ import {DisplayUserComponent} from "app/display-user/display-user.component";
 import {RegisterUserComponent} from "app/register-user/register-user.component";
 import {AlertModule} from "ng2-bootstrap";
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+
+const appRoutes: Routes = [
+    { path: 'login', component: LoginUserComponent },
+    { path: 'register',      component: RegisterUserComponent },
+    { path: 'user-details', component: DisplayUserComponent},
+    { path: 'forgot-password', component: ResetPasswordComponent},
+    { path: 'home', component: HomeComponent}
+    //{ path: '**', component: PageNotFoundComponent }
+  ];
 
 @NgModule({
     declarations: [
@@ -18,7 +29,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
         DisplayUserComponent,
         LoginUserComponent,
         RegisterUserComponent,
-        ResetPasswordComponent
+        ResetPasswordComponent,
+        HomeComponent
     ],
     imports: [
         BrowserModule,
@@ -26,10 +38,12 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
         ReactiveFormsModule,
         HttpModule,
         AlertModule.forRoot(),
-        AngularFireModule.initializeApp(firebaseConfig, authConfig)
+        AngularFireModule.initializeApp(firebaseConfig, authConfig),
+        RouterModule.forRoot(appRoutes)
     ],
     providers: [AuthService],
     bootstrap: [AppComponent]
 })
+
 export class AppModule {
 }

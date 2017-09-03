@@ -1,3 +1,4 @@
+<router-outlet></router-outlet>
 <h3>Register</h3>
 <form [formGroup]="form" role="form" (ngSubmit)="onSubmit(form.value)" novalidate>
     <div class="form-group" [class.has-error]="name.invalid && name.touched">
