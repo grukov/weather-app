@@ -1,4 +1,5 @@
 import {Injectable, Inject} from "@angular/core";
+import {CanActivate} from '@angular/router';
 import {User} from "firebase";
 import {AngularFireAuth, AuthProviders, AuthMethods, AngularFire, FirebaseApp} from "angularfire2";
 import {UserInfo} from "./user-info";
@@ -6,7 +7,7 @@ import {Observable, Subject, ReplaySubject, AsyncSubject} from "rxjs";
 import Auth = firebase.auth.Auth;
 
 @Injectable()
-export class AuthService {
+export class AuthService implements CanActivate {
     private userInfoSubject: ReplaySubject<UserInfo>;
     private auth: User;
     private firebaseAuth: Auth;
@@ -134,4 +135,8 @@ export class AuthService {
         result.error("Not a supported authentication method: " + provider)
         return result.asObservable();
     }
+
+    canActivate() {
+        return this.isLoggedIn();
+      }
 }

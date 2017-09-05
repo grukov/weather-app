@@ -18,7 +18,7 @@ import { HomeComponent } from './home/home.component';
 const appRoutes: Routes = [
     { path: 'login', component: LoginUserComponent },
     { path: 'register',      component: RegisterUserComponent },
-    { path: 'user-details', component: DisplayUserComponent},
+    { path: 'user-details', component: DisplayUserComponent, canActivate: [ AuthService ]},
     { path: 'forgot-password', component: ResetPasswordComponent},
     { path: 'home', component: HomeComponent}
     //{ path: '**', component: PageNotFoundComponent }

@@ -9,14 +9,17 @@ import { WeatherService } from '../shared/weather-service.service';
 })
 export class HomeComponent implements OnInit {
   data: any;
+  image: string;
 
   constructor(private weatherService: WeatherService) { }
 
   ngOnInit() {
-    this.weatherService.getWeatherData("Sofia").subscribe(data => {
+    this.weatherService.getWeatherData("Las Vegas").subscribe(data => {
       this.data = data;
 
       console.log(this.data);
+      var channels = this.data.query.results.channel;
+      this.image = channels[1].image.url;
   });
 }
 }
