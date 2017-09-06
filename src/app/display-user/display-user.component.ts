@@ -25,7 +25,7 @@ export class DisplayUserComponent implements OnInit  {
         }
      }
 
-    //his.authService.isLoggedIn();
+    //this.authService.isLoggedIn();
 
     logout() {
         this.authService.logout().subscribe(() => this.onLoggedOut.emit("success"));

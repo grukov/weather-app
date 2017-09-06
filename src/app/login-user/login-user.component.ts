@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Output} from "@angular/core";
+import { Component, EventEmitter, Output, ViewContainerRef } from "@angular/core";
 import {AuthService} from "app/shared/auth.service";
 import {FormBuilder, Validators, AbstractControl, FormGroup} from "@angular/forms";
 import { Router } from '@angular/router';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
     selector: 'app-login-user',
@@ -15,7 +16,9 @@ export class LoginUserComponent {
     @Output() onSuccess = new EventEmitter();
     @Output() onError = new EventEmitter();
 
-    constructor(private authService: AuthService, private fb: FormBuilder, private router: Router) {
+    constructor(private authService: AuthService, private fb: FormBuilder, private router: Router,
+    private toastsManager: ToastsManager, vRef: ViewContainerRef) {
+        this.toastsManager.setRootViewContainerRef(vRef);
         this.form = fb.group({
             'email': ['', Validators.required],
             'password': ['', Validators.required]
@@ -35,7 +38,7 @@ export class LoginUserComponent {
                     },
                     (err) => {
                         this.onError.emit(err)
-                        console.log(err);
+                        this.toastsManager.warning("", err.message, {toastLife: 3000});
                     }
                 );
         }
@@ -48,7 +51,19 @@ export class LoginUserComponent {
         );
     }
 
+    // loginVia(provider: string) {
+    //     this.authService.loginViaProvider(provider)
+    //     .finally(function (){
+    //         console.log('here')
+    //     })
+    //     .subscribe(
+    //         () => this.onSuccess.emit(),
+    //         err => this.onError.emit(err)
+    //     );
+    // }
+
     forgotPassword(){
+        this.toastsManager.success("Success", 'You are on right track.', {toastLife: 3000});
         this.router.navigateByUrl('/forgot-password');
     }
     

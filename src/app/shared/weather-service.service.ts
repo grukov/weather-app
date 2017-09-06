@@ -4,7 +4,6 @@ import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class WeatherService {
-  data: any;
 
   constructor(private http: Http) { 
 
