@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output, ViewContainerRef } from '@angular/core';
-import { AuthService } from 'app/shared/auth.service';
+import { AuthService } from './../../shared/auth.service';
 import { FormBuilder, Validators, AbstractControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';

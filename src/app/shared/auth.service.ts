@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { CanActivate } from '@angular/router';
 import { User } from 'firebase';
-import { AngularFireAuth, AuthProviders, AuthMethods, AngularFire, FirebaseApp } from "angularfire2";
+import { AngularFireAuth, AuthProviders, AuthMethods, AngularFire, FirebaseApp } from 'angularfire2';
 import { UserInfo } from './user-info';
 import { Observable, Subject, ReplaySubject, AsyncSubject } from 'rxjs';
 import Auth = firebase.auth.Auth;
@@ -70,7 +70,7 @@ export class AuthService implements CanActivate {
             isLoggedInBS.next(!ui.isAnonymous);
             isLoggedInBS.complete();
         });
-        return isLoggedInBS;
+        return isLoggedInBS.asObservable();
     }
 
     updateDisplayName(displayName: string): Observable<string> {
@@ -78,7 +78,7 @@ export class AuthService implements CanActivate {
         this.auth.updateProfile({ displayName: displayName, photoURL: null }).then(a => {
             result.next('onSuccess');
         }).catch(err => result.error(err));
-        return result;
+        return result.asObservable();
     }
 
     createUser(email: string, password: string, displayName: string): Observable<string> {
@@ -113,7 +113,7 @@ export class AuthService implements CanActivate {
         this.firebaseAuth.sendPasswordResetEmail(email)
             .then(() => result.next('success'))
             .catch(err => result.error(err));
-        return result;
+        return result.asObservable();
     }
 
     loginViaProvider(provider: string): Observable<String> {

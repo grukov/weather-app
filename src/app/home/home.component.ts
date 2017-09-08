@@ -20,12 +20,12 @@ export class HomeComponent implements OnInit {
     this.locationService.getLocation().subscribe(location => {
       console.log(location);
 
-      this.weatherService.getWeatherData(location.city).subscribe(data => {
-        this.data = data;
-        console.log(this.data);
-        let channels = this.data.query.results.channel;
-        this.image = channels[1].image.url;
-      });
+      // this.weatherService.getWeatherData(location.city).subscribe(data => {
+      //   this.data = data;
+      //   console.log(this.data);
+      //   let channels = this.data.query.results.channel;
+      //   this.image = channels[1].image.url;
+      // });
     });
   }
 }
