@@ -1,6 +1,6 @@
-import {Component, Output, EventEmitter} from "@angular/core";
-import {FormGroup, AbstractControl, FormBuilder, Validators} from "@angular/forms";
-import {AuthService} from "app/shared/auth.service";
+import { Component, Output, EventEmitter } from '@angular/core';
+import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from 'app/shared/auth.service';
 
 @Component({
     selector: 'app-reset-password',
@@ -24,11 +24,11 @@ export class ResetPasswordComponent {
         if (this.form.valid) {
             this.authService.sendPasswordResetEmail(this.email.value)
                 .subscribe(
-                    () => {
-                        this.onSuccess.emit();
-                        this.form.reset();
-                    },
-                    err => this.onError.emit(err)
+                () => {
+                    this.onSuccess.emit();
+                    this.form.reset();
+                },
+                err => this.onError.emit(err)
                 );
 
         }

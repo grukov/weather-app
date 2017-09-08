@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Output, ViewContainerRef } from "@angular/core";
-import {AuthService} from "app/shared/auth.service";
-import {FormBuilder, Validators, AbstractControl, FormGroup} from "@angular/forms";
+import { Component, EventEmitter, Output, ViewContainerRef } from '@angular/core';
+import { AuthService } from 'app/shared/auth.service';
+import { FormBuilder, Validators, AbstractControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
@@ -17,7 +17,7 @@ export class LoginUserComponent {
     @Output() onError = new EventEmitter();
 
     constructor(private authService: AuthService, private fb: FormBuilder, private router: Router,
-    private toastsManager: ToastsManager, vRef: ViewContainerRef) {
+        private toastsManager: ToastsManager, vRef: ViewContainerRef) {
         this.toastsManager.setRootViewContainerRef(vRef);
         this.form = fb.group({
             'email': ['', Validators.required],
@@ -31,15 +31,15 @@ export class LoginUserComponent {
         if (this.form.valid) {
             this.authService.login(this.email.value, this.password.value)
                 .subscribe(
-                    () => {
-                        this.onSuccess.emit();
-                        this.form.reset();
-                        window.location.href = '/home';
-                    },
-                    (err) => {
-                        this.onError.emit(err)
-                        this.toastsManager.warning("", err.message, {toastLife: 3000});
-                    }
+                () => {
+                    this.onSuccess.emit();
+                    this.form.reset();
+                    window.location.href = '/home';
+                },
+                (err) => {
+                    this.onError.emit(err)
+                    this.toastsManager.warning('', err.message, { toastLife: 3000 });
+                }
                 );
         }
     }
@@ -62,16 +62,16 @@ export class LoginUserComponent {
     //     );
     // }
 
-    forgotPassword(){
-        this.toastsManager.success("Success", 'You are on right track.', {toastLife: 3000});
+    forgotPassword() {
+        this.toastsManager.success('Success', 'You are on right track.', { toastLife: 3000 });
         this.router.navigateByUrl('/forgot-password');
     }
-    
-    goToRegister(){
+
+    goToRegister() {
         this.router.navigateByUrl('/register');
     }
 
-    continueAsGuest(){
+    continueAsGuest() {
         this.router.navigateByUrl('/home');
     }
 }
