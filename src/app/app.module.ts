@@ -1,3 +1,4 @@
+import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,15 +19,6 @@ import { HomeComponent } from './home/home.component';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { MyCitiesComponent } from './my-cities/my-cities.component';
 
-const appRoutes: Routes = [
-    { path: 'login', component: LoginUserComponent },
-    { path: 'register', component: RegisterUserComponent },
-    { path: 'user-details', component: DisplayUserComponent, canActivate: [AuthService] },
-    { path: 'forgot-password', component: ResetPasswordComponent },
-    { path: 'home', component: HomeComponent },
-    { path: 'my-cities', component: MyCitiesComponent }
-    // { path: '**', component: PageNotFoundComponent }
-];
 
 @NgModule({
     declarations: [
@@ -41,11 +33,11 @@ const appRoutes: Routes = [
     imports: [
         BrowserModule,
         FormsModule,
+        AppRoutingModule,
         ReactiveFormsModule,
         HttpModule,
         AlertModule.forRoot(),
         AngularFireModule.initializeApp(firebaseConfig, authConfig),
-        RouterModule.forRoot(appRoutes),
         ToastModule.forRoot()
     ],
     providers: [AuthService, WeatherService, LocationService],
