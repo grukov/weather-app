@@ -33,7 +33,14 @@ export class AuthService implements CanActivate {
                 };
             } else {
                 this.auth = null;
-                userInfo.isAnonymous = true;
+                userInfo = {
+                    isAnonymous: true,
+                    email: null,
+                    displayName: null,
+                    providerId: null,
+                    photoURL: null,
+                    uid: null
+                }
             }
             this.userInfoSubject.next(userInfo);
         });

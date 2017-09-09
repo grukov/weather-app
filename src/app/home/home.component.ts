@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Injectable } from '@angular/core';
+import { Injectable, ViewContainerRef } from '@angular/core';
 import { WeatherService } from '../shared/weather-service.service';
 import { LocationService } from 'app/shared/location.service';
+import { City } from '../../models/city.model';
+import { ToastsManager } from 'ng2-toastr';
 
 @Component({
   selector: 'app-home',
@@ -9,10 +11,9 @@ import { LocationService } from 'app/shared/location.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  data: any;
-  image: string;
-
-  constructor(private weatherService: WeatherService, private locationService: LocationService) { }
+  cities: Array<City>;
+  selectedCity;
+  weatherData;
 
   ngOnInit() {
     let city;
@@ -28,4 +29,42 @@ export class HomeComponent implements OnInit {
       // });
     });
   }
+
+
+  constructor(private weatherService: WeatherService, private toastsManager: ToastsManager
+    , vRef: ViewContainerRef, private locationService: LocationService) {
+    this.toastsManager.setRootViewContainerRef(vRef);
+  }
+
+  searchCity(city) {
+    this.weatherService.getWeatherData(city).subscribe(data => {
+      this.getCorrectCities(data, city);
+      this.weatherData = data;
+      if (this.cities.length === 0) {
+        this.toastsManager.warning('', 'Ciry not found!', { toastLife: 3000 });
+      }
+    });
+  }
+
+  selectCity(id) {
+    this.selectedCity = this.weatherData.query.results.channel[id];
+  }
+
+  getCorrectCities(data, city) {
+    this.cities = new Array<City>();
+    for (let i = 0; i < data.query.results.channel.length; i++) {
+      let currentCityData = data.query.results.channel[i];
+      let currentCityIndex = currentCityData.title.indexOf(city);
+      if (currentCityIndex > -1) {
+        let title = currentCityData.title.substring(currentCityIndex, currentCityData.title.length);
+        this.cities.push(
+          {
+            id: i,
+            name: city,
+            description: title
+          })
+      }
+    }
+  }
+
 }

@@ -26,9 +26,7 @@ import { AuthService } from './../shared/auth.service';
     LoginUserComponent,
     RegisterUserComponent,
     ResetPasswordComponent,
-    MyCitiesComponent,
-    WeatherComponent,
-    ForecastComponent
+    MyCitiesComponent
   ],
   providers: [AuthService]
 })

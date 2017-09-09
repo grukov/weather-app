@@ -1,5 +1,4 @@
-<p>home</p>
-<!-- <input #city>
+<input #city>
 <button calss="btn btn-default" (click)="searchCity(city.value)">Search</button>
 <hr/>
 <div class="col-md-4">
@@ -10,21 +9,10 @@
 <div class="col-md-8">
   <div *ngIf="selectedCity != undefined">
     <div class="col-md-4">
-      <b>Astronomy</b>
-      <p>Sunrise: {{selectedCity.astronomy.sunrise}}</p>
-      <p>Sunset: {{selectedCity.astronomy.sunset}}</p>
-      <b>Atmosphere</b>
-      <p>humidity: {{selectedCity.atmosphere.humidity}}</p>
-      <p>pressure: {{selectedCity.atmosphere.pressure}} in</p>
-      <p>visibility: {{selectedCity.atmosphere.visibility}} miles</p>
-      <b>Temperature</b>
-      <p>{{selectedCity.item.condition.temp}}&#8457; {{selectedCity.item.condition.text}}</p>
+      <app-weather [selectedCity]=selectedCity></app-weather>
     </div>
     <div class="col-md-8">
-      <b>Forecast</b>
-      <div *ngFor="let item of selectedCity.item.forecast">
-        <p>{{item.date}}, <b>{{item.day}}</b>, high: {{item.high}}&#8457;, low: {{item.low}}&#8457;, {{item.text}}</p>
-      </div>
+      <app-forecast [selectedCity]=selectedCity></app-forecast>
     </div>
   </div>
-</div> -->
+</div>
