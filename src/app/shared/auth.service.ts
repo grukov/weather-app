@@ -1,9 +1,9 @@
-import {Injectable, Inject} from "@angular/core";
-import {CanActivate} from '@angular/router';
-import {User} from "firebase";
-import {AngularFireAuth, AuthProviders, AuthMethods, AngularFire, FirebaseApp} from "angularfire2";
-import {UserInfo} from "./user-info";
-import {Observable, Subject, ReplaySubject, AsyncSubject} from "rxjs";
+import { Injectable, Inject } from '@angular/core';
+import { CanActivate } from '@angular/router';
+import { User } from 'firebase';
+import { AngularFireAuth, AuthProviders, AuthMethods, AngularFire, FirebaseApp } from 'angularfire2';
+import { UserInfo } from './user-info';
+import { Observable, Subject, ReplaySubject, AsyncSubject } from 'rxjs';
 import Auth = firebase.auth.Auth;
 
 @Injectable()
@@ -40,8 +40,8 @@ export class AuthService implements CanActivate {
     login(email: string, password: string): Observable<string> {
         let result = new Subject<string>();
         this.initUserInfoSubject();
-        this.angularFireAuth.login({email: email, password: password})
-            .then(() => result.next("success"))
+        this.angularFireAuth.login({ email: email, password: password })
+            .then(() => result.next('success'))
             .catch(err => result.error(err));
         return result.asObservable();
     }
@@ -58,7 +58,7 @@ export class AuthService implements CanActivate {
         let result = new Subject<string>();
         this.initUserInfoSubject();
         this.angularFireAuth.logout()
-            .then(() => result.next("success"))
+            .then(() => result.next('success'))
             .catch(err => result.error(err));
         return result.asObservable();
     }
@@ -70,23 +70,23 @@ export class AuthService implements CanActivate {
             isLoggedInBS.next(!ui.isAnonymous);
             isLoggedInBS.complete();
         });
-        return isLoggedInBS;
+        return isLoggedInBS.asObservable();
     }
 
     updateDisplayName(displayName: string): Observable<string> {
         let result = new Subject<string>();
-        this.auth.updateProfile({displayName: displayName, photoURL: null}).then(a => {
-            result.next("onSuccess");
+        this.auth.updateProfile({ displayName: displayName, photoURL: null }).then(a => {
+            result.next('onSuccess');
         }).catch(err => result.error(err));
-        return result;
+        return result.asObservable();
     }
 
     createUser(email: string, password: string, displayName: string): Observable<string> {
         let result = new Subject<string>();
-        this.angularFireAuth.createUser({email: email, password: password})
+        this.angularFireAuth.createUser({ email: email, password: password })
             .then(auth => {
-                auth.auth.updateProfile({displayName: displayName, photoURL: null});
-                result.next("success");
+                auth.auth.updateProfile({ displayName: displayName, photoURL: null });
+                result.next('success');
             })
             .catch(err => result.error(err));
         return result.asObservable();
@@ -95,7 +95,7 @@ export class AuthService implements CanActivate {
     updateEmail(email: string): Observable<string> {
         let result = new Subject<string>();
         this.auth.updateEmail(email).then(a => {
-            result.next("success");
+            result.next('success');
         }).catch(err => result.error(err));
         return result.asObservable();
     }
@@ -103,7 +103,7 @@ export class AuthService implements CanActivate {
     updatePassword(password: string): Observable<string> {
         let result = new Subject<string>();
         this.auth.updatePassword(password).then(a => {
-            result.next("success");
+            result.next('success');
         }).catch(err => result.error(err));
         return result.asObservable();
     }
@@ -111,32 +111,31 @@ export class AuthService implements CanActivate {
     sendPasswordResetEmail(email: string): Observable<string> {
         let result = new Subject<string>();
         this.firebaseAuth.sendPasswordResetEmail(email)
-            .then(() => result.next("success"))
+            .then(() => result.next('success'))
             .catch(err => result.error(err));
-        return result;
+        return result.asObservable();
     }
 
     loginViaProvider(provider: string): Observable<String> {
         let result = new Subject<string>();
-        if (provider === "google") {
+        if (provider === 'google') {
             this.angularFireAuth
-                .login({provider: AuthProviders.Google, method: AuthMethods.Popup})
-                .then(auth => result.next("success"))
+                .login({ provider: AuthProviders.Google, method: AuthMethods.Popup })
+                .then(auth => result.next('success'))
+                .catch(err => result.error(err));
+            return result.asObservable();
+        } else if (provider === 'twitter') {
+            this.angularFireAuth
+                .login({ provider: AuthProviders.Twitter, method: AuthMethods.Popup })
+                .then(auth => result.next('success'))
                 .catch(err => result.error(err));
             return result.asObservable();
         }
-        else if (provider === "twitter") {
-            this.angularFireAuth
-                .login({provider: AuthProviders.Twitter, method: AuthMethods.Popup})
-                .then(auth => result.next("success"))
-                .catch(err => result.error(err));
-            return result.asObservable();
-        }
-        result.error("Not a supported authentication method: " + provider)
+        result.error('Not a supported authentication method: ' + provider)
         return result.asObservable();
     }
 
     canActivate() {
         return this.isLoggedIn();
-      }
+    }
 }
