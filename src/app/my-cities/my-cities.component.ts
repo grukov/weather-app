@@ -1,12 +1,13 @@
 import { Component, OnInit, Input, ViewContainerRef } from '@angular/core';
 import { WeatherService } from '../shared/weather-service.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { City } from '../../models/city.model';
+import { ForecastComponent } from '.././forecast/forecast.component'
+import { WeatherComponent } from '.././weather/weather.component'
 
 @Component({
   selector: 'app-my-cities',
   templateUrl: './my-cities.component.html',
-  styleUrls: ['./my-cities.component.css']
+  styleUrls: ['./my-cities.component.css'],
 })
 
 export class MyCitiesComponent implements OnInit {
@@ -34,7 +35,6 @@ export class MyCitiesComponent implements OnInit {
 
   selectCity(id) {
     this.selectedCity = this.weatherData.query.results.channel[id];
-    console.log(this.selectedCity);
   }
 
   getCorrectCities(data, city) {
@@ -56,4 +56,8 @@ export class MyCitiesComponent implements OnInit {
 
 }
 
-
+class City {
+  id: number;
+  name: string;
+  description: string;
+}

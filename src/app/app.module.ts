@@ -9,21 +9,17 @@ import { AuthService } from 'app/shared/auth.service';
 import { WeatherService } from 'app/shared/weather-service.service';
 import { LocationService } from 'app/shared/location.service';
 import { AlertModule } from 'ng2-bootstrap';
-import { RouterModule, Routes } from '@angular/router';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
-import { MyCitiesComponent } from './my-cities/my-cities.component';
 import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
     declarations: [
         AppComponent,
-
         HomeComponent
     ],
     imports: [
         BrowserModule,
-
         AppRoutingModule,
         HttpModule,
         AlertModule.forRoot(),

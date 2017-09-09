@@ -1,1 +1,18 @@
-<p>my sities</p>
+<input #city>
+<button calss="btn btn-default" (click)="searchCity(city.value)">Search</button>
+<hr/>
+<div class="col-md-4">
+<div calss=row *ngFor="let city of cities">
+  <div style="margin-bottom:10px;" class="btn btn-default" (click)="selectCity(city.id)">{{city.description}}</div>
+</div>
+</div>
+<div class="col-md-8">
+<div *ngIf="selectedCity != undefined">
+  <div class="col-md-4">
+    <app-weather [selectedCity]=selectedCity></app-weather>
+  </div>
+  <div class="col-md-8">
+      <app-forecast [selectedCity]=selectedCity></app-forecast>
+  </div>
+</div>
+</div>

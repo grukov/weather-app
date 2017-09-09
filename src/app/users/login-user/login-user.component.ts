@@ -63,15 +63,6 @@ export class LoginUserComponent {
     // }
 
     forgotPassword() {
-        this.toastsManager.success('Success', 'You are on right track.', { toastLife: 3000 });
-        this.router.navigateByUrl('/forgot-password');
-    }
-
-    goToRegister() {
-        this.router.navigateByUrl('/register');
-    }
-
-    continueAsGuest() {
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/user/forgot-password');
     }
 }
