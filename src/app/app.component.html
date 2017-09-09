@@ -8,7 +8,7 @@
                 <li><a [routerLink]="['/home']">Home</a></li>
                 <li><a *ngIf="(isLoggedIn()|async)" [routerLink]="['user/my-cities']">Favorite Cities</a></li>
                 <li><a *ngIf="(isLoggedIn()|async)" href="">Page 2</a></li>
-                <li><a *ngIf="(isLoggedIn()|async)" [routerLink]="['user/user-details']">User Details</a></li>
+                <li><a *ngIf="(isLoggedIn()|async)" [routerLink]="['user/details']">User Details</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a *ngIf="!(isLoggedIn()|async)" [routerLink]="['user/register']"><span class="glyphicon glyphicon-user"></span> Register</a></li>

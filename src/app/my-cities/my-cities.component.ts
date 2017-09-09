@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ViewContainerRef } from '@angular/core';
 import { WeatherService } from '../shared/weather-service.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { City } from '../../models/city.model';
 
 @Component({
   selector: 'app-my-cities',
@@ -55,8 +56,4 @@ export class MyCitiesComponent implements OnInit {
 
 }
 
-class City {
-  id: number;
-  name: string;
-  description: string;
-}
+

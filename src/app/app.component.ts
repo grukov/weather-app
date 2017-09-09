@@ -1,6 +1,6 @@
-import {Component} from "@angular/core";
-import {AuthService} from "app/shared/auth.service";
-import {Observable} from "rxjs";
+import { Component } from '@angular/core';
+import { AuthService } from 'app/shared/auth.service';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class AppComponent {
     private title = 'app works! - test-weather-app';
     private alertType = null;
-    private alertMessage = "";
+    private alertMessage = '';
 
     constructor(private authService: AuthService, private router: Router) {
     }
@@ -21,37 +21,37 @@ export class AppComponent {
     }
 
     onResetPasswordSuccess() {
-        this.alertType = "success";
-        this.alertMessage = "Reset Password Sent!";
+        this.alertType = 'success';
+        this.alertMessage = 'Reset Password Sent!';
     }
 
     onLoginSuccess() {
-        this.alertType = "success";
-        this.alertMessage = "Login Success!";
+        this.alertType = 'success';
+        this.alertMessage = 'Login Success!';
     }
 
     onRegisterSuccess() {
-        this.alertType = "success";
-        this.alertMessage = "User registered!";
+        this.alertType = 'success';
+        this.alertMessage = 'User registered!';
     }
 
     onError(err) {
-        this.alertType = "danger";
+        this.alertType = 'danger';
         this.alertMessage = err;
     }
 
     onLoggedOut() {
         // Just reset any displayed messsage.
         this.alertType = null;
-        this.alertMessage = "";
+        this.alertMessage = '';
     }
 
     alertClosed() {
         this.alertType = null;
-        this.alertMessage = "";
+        this.alertMessage = '';
     }
 
-    logout(){
+    logout() {
         this.authService.logout();
         this.router.navigateByUrl('/home');
     }

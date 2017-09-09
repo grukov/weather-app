@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { CanActivate } from '@angular/router';
 import { User } from 'firebase';
 import { AngularFireAuth, AuthProviders, AuthMethods, AngularFire, FirebaseApp } from 'angularfire2';
-import { UserInfo } from './user-info';
+import { UserInfo } from '../../models/user-info.model';
 import { Observable, Subject, ReplaySubject, AsyncSubject } from 'rxjs';
 import Auth = firebase.auth.Auth;
 
@@ -20,15 +20,17 @@ export class AuthService implements CanActivate {
         angularFireAuth.subscribe(auth => {
             // console.log("auth: ", JSON.stringify(auth));
 
-            let userInfo = new UserInfo();
+            let userInfo: UserInfo;
             if (auth != null) {
                 this.auth = auth.auth;
-                userInfo.isAnonymous = auth.auth.isAnonymous;
-                userInfo.email = auth.auth.email;
-                userInfo.displayName = auth.auth.displayName;
-                userInfo.providerId = auth.auth.providerId;
-                userInfo.photoURL = auth.auth.photoURL;
-                userInfo.uid = auth.auth.uid;
+                userInfo = {
+                    isAnonymous: auth.auth.isAnonymous,
+                    email: auth.auth.email,
+                    displayName: auth.auth.displayName,
+                    providerId: auth.auth.providerId,
+                    photoURL: auth.auth.photoURL,
+                    uid: auth.auth.uid
+                };
             } else {
                 this.auth = null;
                 userInfo.isAnonymous = true;

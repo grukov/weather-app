@@ -1,11 +1,11 @@
 /* tslint:disable:no-unused-variable */
-import {async, ComponentFixture, TestBed} from "@angular/core/testing";
-import {LoginUserComponent} from "./login-user.component";
-import {AuthService} from "app/shared/auth.service";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {AsyncSubject, Observable, ReplaySubject} from "rxjs";
-import {UserInfo} from "app/shared/user-info";
-import {AuthServiceStub} from "app/shared/auth.service.stub";
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { LoginUserComponent } from './login-user.component';
+import { AuthService } from 'app/shared/auth.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AsyncSubject, Observable, ReplaySubject } from 'rxjs';
+import { UserInfo } from '../../../models/user-info.model';
+import { AuthServiceStub } from 'app/shared/auth.service.stub';
 
 describe('LoginUserComponent', () => {
     let component: LoginUserComponent;
@@ -21,7 +21,7 @@ describe('LoginUserComponent', () => {
             ],
             declarations: [LoginUserComponent],
             providers: [
-                {provide: AuthService, useValue: authServiceStub}
+                { provide: AuthService, useValue: authServiceStub }
             ]
         })
             .compileComponents();

@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { AuthService } from 'app/shared/auth.service';
-import { UserInfo } from 'app/shared/user-info';
+import { UserInfo } from '../../../models/user-info.model';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 

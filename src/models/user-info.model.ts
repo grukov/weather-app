@@ -1,4 +1,4 @@
-export class UserInfo {
+export interface UserInfo {
     isAnonymous: boolean;
     email: string;
     displayName: string;

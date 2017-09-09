@@ -34,7 +34,7 @@ export class LoginUserComponent {
                 () => {
                     this.onSuccess.emit();
                     this.form.reset();
-                    window.location.href = '/home';
+                    this.router.navigateByUrl('/home');
                 },
                 (err) => {
                     this.onError.emit(err)
