@@ -17,6 +17,9 @@ import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { MyCitiesComponent } from './my-cities/my-cities.component';
+import { ForecastDirective } from './forecast.directive';
+import { ForecastComponent } from './forecast/forecast.component';
+import { WeatherComponent } from './weather/weather.component';
 
 const appRoutes: Routes = [
     { path: 'login', component: LoginUserComponent },
@@ -36,7 +39,10 @@ const appRoutes: Routes = [
         RegisterUserComponent,
         ResetPasswordComponent,
         HomeComponent,
-        MyCitiesComponent
+        MyCitiesComponent,
+        ForecastDirective,
+        ForecastComponent,
+        WeatherComponent
     ],
     imports: [
         BrowserModule,

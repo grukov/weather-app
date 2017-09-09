@@ -1,0 +1,5 @@
+<div>
+  <b>Forecast</b>
+  <div *ngFor="let item of forecastModel">
+    <p>{{item.date}}, <b>{{item.day}}</b>, high: {{item.high}}&#8457;, low: {{item.low}}&#8457;, {{item.text}}</p>
+</div>
