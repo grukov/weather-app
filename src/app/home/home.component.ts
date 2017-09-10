@@ -1,3 +1,5 @@
+import { AuthService } from './../shared/auth.service';
+import { DbService } from '../shared/db.service';
 import { Component, OnInit } from '@angular/core';
 import { Injectable, ViewContainerRef } from '@angular/core';
 import { WeatherService } from '../shared/weather-service.service';
@@ -32,12 +34,17 @@ export class HomeComponent implements OnInit {
 
 
   constructor(private weatherService: WeatherService, private toastsManager: ToastsManager
-    , vRef: ViewContainerRef, private locationService: LocationService) {
+    , vRef: ViewContainerRef, private locationService: LocationService, private db: DbService, private authService: AuthService) {
     this.toastsManager.setRootViewContainerRef(vRef);
   }
 
-  addToFavorites(city){
-    
+  addToFavorites(city) {
+    let source = this.authService.currentUser().subscribe(u => {
+      console.log(city.name);
+      this.db.addCity(u.uid, city.description);
+
+    })
+    source.unsubscribe();
   }
 
   searchCity(city) {

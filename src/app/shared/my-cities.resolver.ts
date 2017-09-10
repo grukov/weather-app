@@ -7,13 +7,28 @@ import { Observable } from 'rxjs';
 
 
 @Injectable()
-export class MyCitiesResolver implements Resolve<any[]> {
+export class MyCitiesResolver implements Resolve<any> {
     constructor(private db: DbService, private authService: AuthService, private weatherService: WeatherService) { }
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any[] | Observable<any[]> | Promise<any[]> {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any[] | Observable<any> | Promise<any> {
 
-        return this.db.getAllCities('h3hesD8QdqTciCpKOmqSqKA1Kfx1').toPromise().then(names => {
-            return this.weatherService.getWeatherDataCities(names).toPromise();
-        })
+        return this.authService.currentUser().toPromise().then(u => {
+            return this.db.getAllCities(u.uid).toPromise().then(names => {
+
+                if (names.length > 0) {
+                    return this.weatherService.getWeatherDataCities(names).map(data => {
+                        if (!data.length) {
+                            let result = [];
+                            result.push(data);
+                            return result;
+                        } else {
+                            return data;
+                        }
+                    }).toPromise();
+                } else {
+                    return Promise.resolve([]);
+                }
+            })
+        });
     }
 
 }

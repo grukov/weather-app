@@ -16,7 +16,6 @@ export class WeatherService {
   }
   getWeatherDataCities(city: string[]): Observable<any> {
     const mapedCities = city.map(n => `"${n}"`).join(', ');
-    console.log(mapedCities);
     const searchtext = `select * from weather.forecast where woeid in (SELECT woeid FROM geo.places WHERE text IN (${mapedCities}))&format=json`
     return this.http.get('http://query.yahooapis.com/v1/public/yql?q=' + searchtext)
       .map((res: Response) => res.json()).map(data => {

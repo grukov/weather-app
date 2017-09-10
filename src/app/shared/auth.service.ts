@@ -61,7 +61,7 @@ export class AuthService implements CanActivate {
     }
 
     currentUser(): Observable<UserInfo> {
-        return this.userInfoSubject.asObservable();
+        return this.userInfoSubject.asObservable().first();
     }
 
     logout(): Observable<string> {

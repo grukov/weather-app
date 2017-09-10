@@ -14,16 +14,17 @@ export class DbService {
   }
 
   createUser(id: string) {
-    this.users.push({ id: id, favorites: { 'Sofia': true } });
+    this.users.push({ id: id });
   }
 
   addCity(id: string, cityName: string) {
+    console.log(cityName);
     let source = this.users.map(data => data.filter(u => {
       return u.id === id;
     })).subscribe(data => {
       let user = data[0];
       let $key = user.$key;
-      let favorites = user.favorites;
+      let favorites = user.favorites || {};
       favorites[cityName] = true;
       this.users.update($key, { favorites });
       source.unsubscribe();
@@ -47,11 +48,15 @@ export class DbService {
     return Observable.create(observer => {
       this.users.map(data => {
         return data.filter(u => {
+
           return u.id === id;
         })
       }).subscribe(data => {
         let user = data[0];
-        let cities = Object.keys(user.favorites).filter(key => user.favorites[key]);
+        let cities = [];
+        if (user.favorites) {
+          cities = Object.keys(user.favorites).filter(key => user.favorites[key]);
+        }
         observer.next(cities);
       });
     }).first();
