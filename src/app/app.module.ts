@@ -1,3 +1,5 @@
+import { WeatherModule } from './weather-details/weather.module';
+import { MyCitiesResolver } from './shared/my-cities.resolver';
 import { DbService } from './shared/db.service';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -22,8 +24,6 @@ import { TimePipe } from './pipes/time.pipe';
     declarations: [
         AppComponent,
         HomeComponent,
-        WeatherComponent,
-        ForecastComponent,
         TemperaturePipe,
         TimePipe
     ],
@@ -33,9 +33,11 @@ import { TimePipe } from './pipes/time.pipe';
         HttpModule,
         AlertModule.forRoot(),
         AngularFireModule.initializeApp(firebaseConfig, authConfig),
-        ToastModule.forRoot()
+        ToastModule.forRoot(),
+        WeatherModule
     ],
-    providers: [AuthService, WeatherService, LocationService, DbService],
+    providers: [AuthService, WeatherService, LocationService, DbService, TimePipe, MyCitiesResolver],
+    exports: [WeatherComponent],
     bootstrap: [AppComponent]
 })
 
