@@ -1,9 +1,13 @@
-<b>Astronomy</b>
-<p>Sunrise: {{selectedCityModel.astronomy.sunrise | time: 24}}</p>
-<p>Sunset: {{selectedCityModel.astronomy.sunset | time: 24}}</p>
-<b>Atmosphere</b>
-<p>humidity: {{selectedCityModel.atmosphere.humidity}} hps</p>
-<p>pressure: {{selectedCityModel.atmosphere.pressure}} in</p>
-<p>visibility: {{selectedCityModel.atmosphere.visibility}} miles</p>
-<b>Temperature</b>
-<p>{{selectedCityModel.item.condition.temp | temperature: 'c'}} {{selectedCityModel.item.condition.text}}</p>
+<div [ngClass]='"jumbotron"'>
+    <h2>{{selectedCityModel.location.city}} </h2>
+    <h3>{{selectedCityModel.location.country}}</h3>
+    <b>Astronomy</b>
+    <p>Sunrise: {{selectedCityModel.astronomy.sunrise | time: 24}}</p>
+    <p>Sunset: {{selectedCityModel.astronomy.sunset | time: 24}}</p>
+    <b>Atmosphere</b>
+    <p>humidity: {{selectedCityModel.atmosphere.humidity}} hps</p>
+    <p>pressure: {{selectedCityModel.atmosphere.pressure}} in</p>
+    <p>visibility: {{selectedCityModel.atmosphere.visibility}} miles</p>
+    <b>Temperature</b>
+    <p>{{selectedCityModel.item.condition.temp | temperature: 'c'}} {{selectedCityModel.item.condition.text}}</p>
+</div>

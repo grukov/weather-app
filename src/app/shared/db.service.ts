@@ -6,7 +6,7 @@ import { Observable } from 'rxjs'
 export class DbService {
   users: FirebaseListObservable<any[]>;
   constructor(private db: AngularFireDatabase) {
-    this.users = db.list('/users');
+    this.users = db.list('users');
   }
 
   getAllUser(): FirebaseListObservable<any[]> {
@@ -43,17 +43,18 @@ export class DbService {
     });
   }
 
-  getAllCities(id: string) {
-
+  getAllCities(id: string): Observable<any> {
     return Observable.create(observer => {
-      this.users.map(data => data.filter(u => {
-        return u.id === id;
-      })).subscribe(data => {
+      this.users.map(data => {
+        return data.filter(u => {
+          return u.id === id;
+        })
+      }).subscribe(data => {
         let user = data[0];
         let cities = Object.keys(user.favorites).filter(key => user.favorites[key]);
         observer.next(cities);
       });
-    });
+    }).first();
   }
 
 }
