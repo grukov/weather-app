@@ -1,3 +1,4 @@
+import { DbService } from './db.service';
 import { Injectable, Inject } from '@angular/core';
 import { CanActivate } from '@angular/router';
 import { User } from 'firebase';
@@ -12,7 +13,7 @@ export class AuthService implements CanActivate {
     private auth: User;
     private firebaseAuth: Auth;
 
-    constructor(private angularFireAuth: AngularFireAuth, @Inject(FirebaseApp) firebaseApp: any) {
+    constructor(private angularFireAuth: AngularFireAuth, @Inject(FirebaseApp) firebaseApp: any, private dbService: DbService) {
         this.initUserInfoSubject();
         // console.log("AuthService");
         this.firebaseAuth = firebaseApp.auth();
@@ -95,6 +96,7 @@ export class AuthService implements CanActivate {
         this.angularFireAuth.createUser({ email: email, password: password })
             .then(auth => {
                 auth.auth.updateProfile({ displayName: displayName, photoURL: null });
+                this.dbService.createUser(auth.uid);
                 result.next('success');
             })
             .catch(err => result.error(err));
