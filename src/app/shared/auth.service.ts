@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { CanActivate } from '@angular/router';
 import { User } from 'firebase';
 import { AngularFireAuth, AuthProviders, AuthMethods, AngularFire, FirebaseApp } from 'angularfire2';
-import { UserInfo } from '../../models/user-info.model';
+//import { UserInfo } from '../../models/user-info.model';
 import { Observable, Subject, ReplaySubject, AsyncSubject } from 'rxjs';
 import Auth = firebase.auth.Auth;
 
@@ -16,11 +16,11 @@ export class AuthService implements CanActivate {
         this.initUserInfoSubject();
         // console.log("AuthService");
         this.firebaseAuth = firebaseApp.auth();
+        var userInfo = new UserInfo();
 
         angularFireAuth.subscribe(auth => {
             // console.log("auth: ", JSON.stringify(auth));
 
-            let userInfo: UserInfo;
             if (auth != null) {
                 this.auth = auth.auth;
                 userInfo = {
@@ -68,7 +68,6 @@ export class AuthService implements CanActivate {
     isLoggedIn(): Observable<boolean> {
         let isLoggedInBS = new AsyncSubject<boolean>();
         this.userInfoSubject.subscribe(ui => {
-            // console.log("isLoggedIn: anonymous=" + ui.isAnonymous);
             isLoggedInBS.next(!ui.isAnonymous);
             isLoggedInBS.complete();
         });
@@ -140,4 +139,13 @@ export class AuthService implements CanActivate {
     canActivate() {
         return this.isLoggedIn();
     }
+}
+
+class UserInfo{
+    isAnonymous: boolean;
+    email: string;
+    displayName: string;
+    photoURL?: string;
+    providerId: string;
+    uid: string;
 }

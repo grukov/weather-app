@@ -11,6 +11,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { MyCitiesComponent } from 'app/my-cities/my-cities.component';
 import { ForecastComponent } from '.././weather-details/forecast/forecast.component';
 import { WeatherComponent } from '.././weather-details/weather/weather.component';
+import { TemperaturePipe } from '.././pipes/temperature.pipe';
+import { TimePipe } from '.././pipes/time.pipe';
 
 import { AuthService } from './../shared/auth.service';
 
@@ -28,7 +30,9 @@ import { AuthService } from './../shared/auth.service';
     ResetPasswordComponent,
     MyCitiesComponent,
     WeatherComponent,
-    ForecastComponent
+    ForecastComponent,
+    TemperaturePipe,
+    TimePipe
   ],
   providers: [AuthService]
 })

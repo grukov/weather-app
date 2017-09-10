@@ -1,9 +1,9 @@
 <b>Astronomy</b>
-<p>Sunrise: {{selectedCityModel.astronomy.sunrise}}</p>
-<p>Sunset: {{selectedCityModel.astronomy.sunset}}</p>
+<p>Sunrise: {{selectedCityModel.astronomy.sunrise | time}}</p>
+<p>Sunset: {{selectedCityModel.astronomy.sunset | time: 24}}</p>
 <b>Atmosphere</b>
-<p>humidity: {{selectedCityModel.atmosphere.humidity}}</p>
+<p>humidity: {{selectedCityModel.atmosphere.humidity}} hps</p>
 <p>pressure: {{selectedCityModel.atmosphere.pressure}} in</p>
 <p>visibility: {{selectedCityModel.atmosphere.visibility}} miles</p>
 <b>Temperature</b>
-<p>{{selectedCityModel.item.condition.temp}}&#8457; {{selectedCityModel.item.condition.text}}</p>
+<p>{{selectedCityModel.item.condition.temp | temperature:'c'}} {{selectedCityModel.item.condition.text}}</p>

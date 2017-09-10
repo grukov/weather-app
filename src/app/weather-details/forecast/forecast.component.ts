@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { TemperaturePipe } from '../../pipes/temperature.pipe';
 
 @Component({
   selector: 'app-forecast',
