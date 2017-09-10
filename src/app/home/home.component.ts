@@ -36,6 +36,10 @@ export class HomeComponent implements OnInit {
     this.toastsManager.setRootViewContainerRef(vRef);
   }
 
+  addToFavorites(city){
+    
+  }
+
   searchCity(city) {
     this.weatherService.getWeatherData(city).subscribe(data => {
       this.getCorrectCities(data, city);

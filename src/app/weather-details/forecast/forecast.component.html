@@ -1,5 +1,5 @@
 <div>
   <b>Forecast</b>
   <div *ngFor="let forecast of forecastModel">
-    <p>{{forecast.date}}, <b>{{forecast.day}}</b>, high: {{forecast.high}}&#8457;, low: {{forecast.low}}&#8457;, {{forecast.text}}</p>
+    <p>{{forecast.date}}, <b>{{forecast.day}}</b>, high: {{forecast.high | temperature: 'c'}}, low: {{forecast.low | temperature: 'c'}}, {{forecast.text}}</p>
 </div>

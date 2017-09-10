@@ -14,6 +14,8 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { HomeComponent } from './home/home.component';
 import { WeatherComponent } from './weather-details/weather/weather.component';
 import { ForecastComponent } from './weather-details/forecast/forecast.component';
+import { TemperaturePipe } from './pipes/temperature.pipe';
+import { TimePipe } from './pipes/time.pipe';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { ForecastComponent } from './weather-details/forecast/forecast.component
         AppComponent,
         HomeComponent,
         WeatherComponent,
-        ForecastComponent
+        ForecastComponent,
+        TemperaturePipe,
+        TimePipe
     ],
     imports: [
         BrowserModule,
