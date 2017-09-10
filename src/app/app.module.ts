@@ -1,3 +1,4 @@
+import { DbService } from './shared/db.service';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -30,7 +31,7 @@ import { ForecastComponent } from './weather-details/forecast/forecast.component
         AngularFireModule.initializeApp(firebaseConfig, authConfig),
         ToastModule.forRoot()
     ],
-    providers: [AuthService, WeatherService, LocationService],
+    providers: [AuthService, WeatherService, LocationService, DbService],
     bootstrap: [AppComponent]
 })
 
