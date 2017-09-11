@@ -1,3 +1,5 @@
+import { AppPipesModule } from './../pipes/app-pipes.module';
+import { RemovableDirective } from '../directoves/removable.directive';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,14 +22,16 @@ import { AuthService } from './../shared/auth.service';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    WeatherModule
+    WeatherModule,
+    AppPipesModule
   ],
   declarations: [
     DisplayUserComponent,
     LoginUserComponent,
     RegisterUserComponent,
     ResetPasswordComponent,
-    MyCitiesComponent
+    MyCitiesComponent,
+    RemovableDirective
   ],
   providers: [AuthService]
 })

@@ -19,7 +19,6 @@ export class MyCitiesComponent implements OnInit {
   constructor(private route: ActivatedRoute, private db: DbService) { }
   ngOnInit(): void {
     this.cities = this.route.snapshot.data['cities'];
-    console.log(this.cities);
   }
 
 }

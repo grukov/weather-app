@@ -11,24 +11,24 @@ export class MyCitiesResolver implements Resolve<any> {
     constructor(private db: DbService, private authService: AuthService, private weatherService: WeatherService) { }
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any[] | Observable<any> | Promise<any> {
 
-        return this.authService.currentUser().toPromise().then(u => {
-            return this.db.getAllCities(u.uid).toPromise().then(names => {
-
-                if (names.length > 0) {
-                    return this.weatherService.getWeatherDataCities(names).map(data => {
-                        if (!data.length) {
-                            let result = [];
-                            result.push(data);
-                            return result;
-                        } else {
-                            return data;
-                        }
-                    }).toPromise();
-                } else {
-                    return Promise.resolve([]);
-                }
+        return Observable.create(observer => {
+            this.authService.currentUser().subscribe(u => {
+                this.db.getAllCities(u.uid).subscribe(names => {
+                    if (names.length > 0) {
+                        this.weatherService.getWeatherDataCities(names).subscribe(data => {
+                            if (!data.length) {
+                                let result = [];
+                                result.push(data);
+                                data = result;
+                            }
+                            observer.next(data);
+                        })
+                    } else {
+                        observer.next([]);
+                    }
+                })
             })
-        });
+        }).first();
     }
 
 }

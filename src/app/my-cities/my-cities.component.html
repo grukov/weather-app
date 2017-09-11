@@ -1,1 +1,1 @@
-<app-weather *ngFor="let city of cities" [selectedCity]="city"></app-weather>
+<app-weather *ngFor="let city of cities" [selectedCity]="city" appRemovable [cityName]="city.description | trimCityName"></app-weather>

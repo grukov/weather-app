@@ -1,3 +1,4 @@
+import { AppPipesModule } from '../pipes/app-pipes.module';
 import { CommonModule } from '@angular/common';
 import { TemperaturePipe } from '../pipes/temperature.pipe';
 import { TimePipe } from './../pipes/time.pipe';
@@ -7,13 +8,12 @@ import { NgModule } from '@angular/core';
 
 @NgModule({
     imports: [
-        CommonModule
+        CommonModule,
+        AppPipesModule
     ],
     declarations: [
         WeatherComponent,
-        ForecastComponent,
-        TimePipe,
-        TemperaturePipe,
+        ForecastComponent
     ],
     exports: [
         WeatherComponent,

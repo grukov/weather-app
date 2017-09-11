@@ -18,7 +18,6 @@ export class DbService {
   }
 
   addCity(id: string, cityName: string) {
-    console.log(cityName);
     let source = this.users.map(data => data.filter(u => {
       return u.id === id;
     })).subscribe(data => {

@@ -21,7 +21,6 @@ export class HomeComponent implements OnInit {
     let city;
 
     this.locationService.getLocation().subscribe(location => {
-      console.log(location);
 
       // this.weatherService.getWeatherData(location.city).subscribe(data => {
       //   this.data = data;
@@ -40,7 +39,6 @@ export class HomeComponent implements OnInit {
 
   addToFavorites(city) {
     let source = this.authService.currentUser().subscribe(u => {
-      console.log(city.name);
       this.db.addCity(u.uid, city.description);
 
     })
