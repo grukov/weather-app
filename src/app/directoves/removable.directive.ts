@@ -18,5 +18,12 @@ export class RemovableDirective {
     });
     source.unsubscribe();
   }
-
+  @HostListener('mouseenter')
+  onMouseEnter() {
+    this.el.nativeElement.querySelector('div').style.backgroundColor = '#A9A9A9';
+  }
+  @HostListener('mouseleave')
+  onMouseLeave() {
+    this.el.nativeElement.querySelector('div').style.backgroundColor = '';
+  }
 }
